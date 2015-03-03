@@ -1,10 +1,13 @@
 require 'bundler'
 Bundler.require
+get '/play' do
+  "You can play the guessing game from this page. Enter a random number guess from 1-20 after /play/guess in the url."
+end
 
 # number guessing game
 playerpts, computerpts = 0, 0
 invalid_enters = 0
-get '/guess/:number' do
+get '/play/guess/:number' do
   player = params[:number].to_i
   numbers = (1..20).to_a
   computer = numbers.sample.to_i
@@ -40,9 +43,6 @@ get '/guess/:number' do
   "Guesses: <br> Player: #{player} | Computer: #{computer}  <br> <br> The winner is...#{winner}!!! <br> The random number was #{random}. <br> <br> Points: <br> Player: #{playerpts} | Computer: #{computerpts} <br> <br> Note: you receive one point for winning a round, and two for exactly guessing the number. <br> Also if you invalidly guess a number more than once, you will lose a point."
 end
 
-get '/play/:game' do
-  "You can play games from this page. Enter the name of the game after the /play in the url. <br> <br> Options: <br> guess/(number)"
-end
 
 
 
